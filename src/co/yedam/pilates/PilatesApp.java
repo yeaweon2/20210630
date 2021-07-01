@@ -13,19 +13,22 @@ public class PilatesApp {
 		
 		while(true) {
 			showMenu();
-			int menu = scn.nextInt();
-			if( menu == 1 ) {
+			String menu = scn.next();
+			if( menu.equals("1") || menu.equals("입력")) {
 				memberAdd();
-			}else if(menu == 2) {
+			}else if(menu.equals("2") || menu.equals("수정")) {
+				memberEdit();
+			}else if(menu.equals("3") || menu.equals("삭제")) {
 				
-			}else if(menu == 3) {
-				
-			}else if(menu == 4) {
+			}else if(menu.equals("4") || menu.equals("회원LIST")) {
 				memberList();
-			}else if(menu == 5) {
+			}else if(menu.equals("5") || menu.equals("이름조회")) {
 				memberFind(); 
-			}else if(menu == 9){
+			}else if(menu.equals("9") || menu.equals("종료")){
 				break;
+			}else {
+				System.out.println("잘못된 메뉴입니다. 다시 선택해주세요.");
+				System.out.println();
 			}
 		}
 		System.out.println("프로그램 종료되었습니다.");
@@ -71,14 +74,18 @@ public class PilatesApp {
 	}
 	
 	public static void memberList() {
+		int chk = 0 ;
 		if( members != null ) {
-			System.out.println( ">>> 총 " + members.length + " 명 <<<");
+			System.out.println();
 			for(int i = 0 ; i < members.length ; i++) {
 				if(members[i] != null) {
 					System.out.println(members[i].showInfo());
-					System.out.println();
+					chk++;
 				}
 			}
+			System.out.println();
+			System.out.println( ">>> 총 " + chk + " 명 <<<");
+			System.out.println();
 		}else {
 			System.out.println("회원정보가 없습니다.");
 		}
@@ -117,5 +124,56 @@ public class PilatesApp {
 		return memberId;
 	}
 
-	
+	public static void memberEdit() {
+		int chk = 0;
+		System.out.print("수정할 회원 이름을 입력해주세요. >>");
+		String editName = scn.next();
+		for(int i = 0 ; i < members.length ; i++) {
+			if(members[i] != null) {
+				if(editName.endsWith(members[i].getMemberName())) {
+					chk++;
+					while(true) {
+						System.out.println("-------------------------------");
+						System.out.println("1.이름 2.연락처 3.생일 4.성별 5.완료");
+						System.out.println("-------------------------------");
+						System.out.print("수정할 정보를 선택해주세요 ==> ");
+						int editMenu = scn.nextInt();
+						if( editMenu == 1 ) {
+							System.out.print("이름을 입력 > ");
+							String editAfName = scn.next();
+							members[i].setMemberName(editAfName);
+						}else if( editMenu == 2 ) {
+							System.out.print("연락처를 입력 > ");
+							String editAfPhone = scn.next();
+							members[i].setMemberPhone(editAfPhone);
+						}else if( editMenu == 3 ) {
+							System.out.print("생일을 입력 > ");
+							String editAfBirth = scn.next();
+							members[i].setMemberBirth(editAfBirth);
+						}else if( editMenu == 4 ){
+							System.out.print("성별을 입력 (1.남/2.여)> ");
+							
+							Gender gen = null;
+							int editAfGen = scn.nextInt();
+							if		(editAfGen == 1){	gen = Gender.MEN; 	}
+							else if	(editAfGen == 2){	gen = Gender.WOMEN;	}
+							members[i].setMemberGen(gen);
+						}else if( editMenu == 5 ){
+							System.out.println();
+							break;
+						}else {
+							System.out.println("1~4번의 메뉴만 선택해주세요.");
+						}
+					}
+					
+				}
+					
+				
+			}
+		}
+		if(chk == 0) {
+			System.out.println("해당 회원은 존재하지 않습니다.");
+		}
+			
+	}
 }
