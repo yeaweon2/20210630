@@ -7,6 +7,15 @@ public class Member {
 	private String memberBirth;
 	private Gender memberGen; // enum
 	
+	public Member(int memberId, String memberName, String memberPhone, String memberBirth, Gender memberGen) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberBirth = memberBirth;
+		this.memberGen = memberGen;
+	}
+	
 	public int getMemberId() {
 		return memberId;
 	}
@@ -44,12 +53,13 @@ public class Member {
 	}
 	
 	public void findShowInfo() {
-		System.out.println();
+		System.out.println("==========================================");
 		System.out.println("1. 회원ID 	: " + this.memberId );
 		System.out.println("2. 회원명  	: " + this.memberName );
 		System.out.println("3. 연락처  	: " + this.memberPhone );
-		System.out.println("4. 생년원일 	: " + this.memberPhone );
+		System.out.println("4. 생년월일 	: " + this.memberBirth );
 		System.out.println("5. 성   별  	: " + this.memberGen );
+		System.out.println("==========================================");
 		System.out.println();
 	}	
 	
