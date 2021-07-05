@@ -7,6 +7,15 @@ public class Member {
 	private String memberBirth;
 	private Gender memberGen; // enum
 	
+	public Member() {}
+	
+	public Member(int memberId, String memberName, String memberPhone) {
+		super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+	}
+
 	public Member(int memberId, String memberName, String memberPhone, String memberBirth, Gender memberGen) {
 		super();
 		this.memberId = memberId;
